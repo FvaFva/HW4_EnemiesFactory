@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _respawnIntervalSecond: 2
-  _enemy: {fileID: 1122123624824334455, guid: 21da1b5181ffa224f942d51053a48872, type: 3}
+  _enemy: {fileID: -1242963336329015612, guid: 21da1b5181ffa224f942d51053a48872, type: 3}
 --- !u!1001 &1607660410076033143
 PrefabInstance:
   m_ObjectHideFlags: 0

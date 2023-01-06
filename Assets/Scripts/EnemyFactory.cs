@@ -5,31 +5,25 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     [SerializeField] private float _respawnIntervalSecond;
-    [SerializeField] private GameObject _enemy;
-
-    private List<Transform> _respawns = new List<Transform>();
-    private float _currentTime = 0;
+    [SerializeField] private Enemy _enemy;
 
     private void Awake()
     {
-        for(int i = 0; i < transform.childCount; i++)
-        {
-            _respawns.Add(transform.GetChild(i));
-        }
+        StartCoroutine(StartProduction());
     }
 
-    private void Update()
+    private IEnumerator StartProduction()
     {
-        if(_currentTime < _respawnIntervalSecond)
-        {
-            _currentTime += Time.deltaTime;
-        }
-        else
-        {
-            Transform pointForCreateEnemy = _respawns[Random.Range(0, _respawns.Count)];
-            Instantiate(_enemy, pointForCreateEnemy.position - transform.position, pointForCreateEnemy.rotation);
-            _currentTime = 0;
-        }
+        for(int i = 0; i < transform.childCount; i++)
+        {        
+            CreateEnemy(transform.GetChild(i));
+            yield return new WaitForSeconds(_respawnIntervalSecond);
+        }       
     }
 
+    private void CreateEnemy(Transform pointForCreateEnemy)
+    {        
+        Vector3 enemyPosition = pointForCreateEnemy.position - transform.position;
+        Instantiate(_enemy, enemyPosition, Quaternion.identity);
+    }
 }
