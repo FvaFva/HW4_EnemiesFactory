@@ -27,7 +27,7 @@ public class EnemyFactory : MonoBehaviour
         else
         {
             Transform pointForCreateEnemy = _respawns[Random.Range(0, _respawns.Count)];
-            Instantiate(_enemy, pointForCreateEnemy);
+            Instantiate(_enemy, pointForCreateEnemy.position - transform.position, pointForCreateEnemy.rotation);
             _currentTime = 0;
         }
     }
