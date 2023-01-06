@@ -9,15 +9,15 @@ public class EnemyFactory : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(StartProduction());
+        StartCoroutine(StartProduction(new WaitForSeconds(_respawnIntervalSecond)));
     }
 
-    private IEnumerator StartProduction()
+    private IEnumerator StartProduction(WaitForSeconds seconds)
     {
         for(int i = 0; i < transform.childCount; i++)
         {        
             CreateEnemy(transform.GetChild(i));
-            yield return new WaitForSeconds(_respawnIntervalSecond);
+            yield return seconds;
         }       
     }
 
